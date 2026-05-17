@@ -1,0 +1,36 @@
+name: Build Fabric Mod
+
+# 触发条件：推送到 main/master 分支、创建 tag 时自动构建
+on:
+  push:
+    branches: [ main, master ]
+    tags: [ 'v*' ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout 代码
+        uses: actions/checkout@v4
+
+      - name: 设置 JDK 21（适配 1.21+ 模组）
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+          cache: gradle
+
+      - name: 给 Gradle Wrapper 加执行权限
+        run: chmod +x gradlew
+
+      - name: 构建模组
+        run: ./gradlew build
+
+      - name: 上传构建产物（Jar 包）
+        uses: actions/upload-artifact@v4
+        with:
+          name: mod-build-artifacts
+          path: build/libs/*.jar
