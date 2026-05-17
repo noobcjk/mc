@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "id": "cmdexec",
+  "version": "1.0.0",
+  "name": "Bash命令执行",
+  "description": "聊天执行Linux Bash命令，仅自用",
+  "authors": ["you"],
+  "contact": {},
+  "license": "MIT",
+  "icon": "assets/cmdexec/icon.png",
+  "environment": "server",
+  "entrypoints": {
+    "main": [
+      "com.cmdexec.CmdExecMod"
+    ]
+  },
+  "mixins": [],
+  "depends": {
+    "fabricloader": ">=0.15.11",
+    "minecraft": "~1.21.3",
+    "java": ">=21",
+    "fabric-api": "*"
+  }
+}
+
